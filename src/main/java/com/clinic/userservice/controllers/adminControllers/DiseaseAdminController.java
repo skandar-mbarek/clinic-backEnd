@@ -1,8 +1,10 @@
-package com.clinic.userservice.controllers.patientControllers;
+package com.clinic.userservice.controllers.adminControllers;
 
 import com.clinic.userservice.constants.Constants;
+import com.clinic.userservice.dtos.request.DiseaseRequest;
 import com.clinic.userservice.entities.Disease;
 import com.clinic.userservice.services.DiseaseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +14,9 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(Constants.APP_ROOT_PATIENT +"/disease")
+@RequestMapping(Constants.APP_ROOT_ADMIN +"/disease")
 @CrossOrigin("*")
-public class DiseasePatientController {
+public class DiseaseAdminController {
 
     @Autowired
     private final DiseaseService service;
@@ -26,6 +28,22 @@ public class DiseasePatientController {
     @GetMapping("{id}")
     public ResponseEntity<Disease> getDiseaseById(@PathVariable Long id){
         return ResponseEntity.ok(service.getDiseaseById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createDisease(@RequestBody @Valid DiseaseRequest request){
+        service.createDisease(request);
+        return ResponseEntity.ok("created success !!");
+    }
+    @PutMapping("{id}")
+    public ResponseEntity<String> updateDisease(@PathVariable Long id,@RequestBody  DiseaseRequest request){
+        service.updateDisease(id,request);
+        return ResponseEntity.ok("updated success !!");
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteDisease(@PathVariable Long id){
+        service.deleteDisease(id);
+        return ResponseEntity.ok("deleted success !!");
     }
 
 }

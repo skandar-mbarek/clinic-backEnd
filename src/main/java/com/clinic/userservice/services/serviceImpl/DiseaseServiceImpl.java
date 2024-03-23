@@ -81,10 +81,9 @@ public class DiseaseServiceImpl implements DiseaseService {
     @Override
     public void deleteDisease(Long id) {
 
-        if (repository.existsById(id)){
-            repository.deleteById(id);
+        if (!repository.existsById(id)){
+            throw new BadRequestException("this disease is not exist");
         }
-        throw new BadRequestException("this speciality is not exist");
-
+        repository.deleteById(id);
     }
 }

@@ -28,7 +28,6 @@ public class SpecialityServiceImpl implements SpecialityService {
                 .name(specialityRequest.getName())
                 .description(specialityRequest.getDescription())
                 .build();
-
         repository.save(speciality);
     }
 

@@ -6,7 +6,7 @@ public interface Constants {
     String APP_ROOT_AUTH = APP_ROOT+"/auth";
     String APP_ROOT_PATIENT = APP_ROOT+"/patient";
     String APP_ROOT_DOCTOR = APP_ROOT+"/doctor";
-    String APP_ROOT_ADMIN = APP_ROOT+"/ADMIN";
+    String APP_ROOT_ADMIN = APP_ROOT+"/admin";
 
 
 

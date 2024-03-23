@@ -1,4 +1,4 @@
-package com.clinic.userservice.controllers.patientControllers;
+package com.clinic.userservice.controllers.doctorControllers;
 
 import com.clinic.userservice.constants.Constants;
 import com.clinic.userservice.entities.Disease;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(Constants.APP_ROOT_PATIENT +"/disease")
+@RequestMapping(Constants.APP_ROOT_DOCTOR +"/disease")
 @CrossOrigin("*")
-public class DiseasePatientController {
+public class DiseaseDoctorController {
 
     @Autowired
     private final DiseaseService service;
@@ -27,5 +27,4 @@ public class DiseasePatientController {
     public ResponseEntity<Disease> getDiseaseById(@PathVariable Long id){
         return ResponseEntity.ok(service.getDiseaseById(id));
     }
-
 }
