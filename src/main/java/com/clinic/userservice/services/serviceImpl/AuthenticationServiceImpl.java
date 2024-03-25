@@ -137,7 +137,7 @@ public class AuthenticationServiceImpl implements AthenticationService {
                 .address(address)
                 .schedule(schedule)
                 .dateOfBirth(request.getDateOfBirth())
-                .role(Role.PATIENT)
+                .role(Role.DOCTOR)
                 .status(false)
                 .licenceNumber(request.getLicenceNumber())
                 .licenceDate(request.getLicenceDate())

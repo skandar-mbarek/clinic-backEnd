@@ -18,6 +18,6 @@ public class ScheduleRequest {
     private List<Day> days;
     private LocalTime timeFrom;
     private LocalTime timeTo;
-    private LocalTime consultationDuration;
+    private Long consultationDuration;
 
 }
