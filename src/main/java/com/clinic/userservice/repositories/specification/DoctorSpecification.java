@@ -10,15 +10,15 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class DoctorSpecification {
 
-    public static Specification<Doctor> findBySpecialityIdAndCity(Long specialityId ,String city){
+    public static Specification<Doctor> findBySpecialityIdAndCity(Long specialityId ,String state){
         return (Root<Doctor> root, CriteriaQuery<?> query , CriteriaBuilder criteriaBuilder)->{
             Predicate predicate = criteriaBuilder.conjunction();
 
             if (specialityId != null){
                 predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("speciality").get("id"),specialityId));
             }
-            if (city != null && !city.isEmpty()){
-                predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("address").get("city"),city));
+            if (state != null && !state.isEmpty()){
+                predicate = criteriaBuilder.and(predicate,criteriaBuilder.equal(root.get("address").get("state"),state));
             }
             return predicate;
         };

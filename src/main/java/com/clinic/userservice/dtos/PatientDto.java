@@ -26,8 +26,10 @@ public class PatientDto {
     private Gendre gender;
     private String phoneNumber;
     private String email;
+    private String imageName;
     private Date dateOfBirth;
     private Address address;
+    private String cnamCode;
     @Enumerated(EnumType.STRING)
     private Role role;
     private Instant createdAt;
@@ -39,12 +41,14 @@ public class PatientDto {
         return PatientDto.builder()
                 .id(patient.getUserId())
                 .firstName(patient.getFirstName())
-                .lastName(patient.getLasName())
+                .lastName(patient.getLastName())
                 .gender(patient.getGender())
                 .phoneNumber(patient.getPhoneNumber())
                 .email(patient.getEmail())
+                .imageName(patient.getImageName())
                 .dateOfBirth(patient.getDateOfBirth())
                 .address(patient.getAddress())
+                .cnamCode(patient.getCnamCode())
                 .role(patient.getRole())
                 .createdAt(patient.getCreatedAt())
                 .updatedAt(patient.getUpdatedAt())

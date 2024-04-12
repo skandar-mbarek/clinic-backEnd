@@ -26,6 +26,7 @@ public class Appointment {
     private Long id;
     private LocalDate date;
     private LocalTime time;
+    private String description;
     private Boolean status=Boolean.TRUE;
     @ManyToOne
     private Doctor doctor;

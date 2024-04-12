@@ -4,9 +4,13 @@ import com.clinic.userservice.constants.Constants;
 import com.clinic.userservice.dtos.request.AppointmentRequest;
 import com.clinic.userservice.entities.Appointment;
 import com.clinic.userservice.services.AppointmentService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +26,7 @@ public class AppointmentPatientController {
     @Autowired
     private final AppointmentService service;
 
-    @GetMapping("{doctorId}")
+    @GetMapping("times/{doctorId}")
     public ResponseEntity<List<String>> getAvailableAppointmentTimes(
             @PathVariable Long doctorId,
             @RequestParam("date")
@@ -32,8 +36,23 @@ public class AppointmentPatientController {
     {
         return ResponseEntity.ok(service.getAvailableTimes(doctorId, date));
     }
+
+    @GetMapping("{patientId}")
+    public ResponseEntity<Page<Appointment>> getAllAppointmentsByPatientId(
+            @PathVariable Long patientId,
+            @RequestParam(required = false) Boolean status,
+            @RequestParam(required = false) String doctorFirstName,
+            @RequestParam(required = false) String doctorLastName,
+            @RequestParam(required = false) String year,
+            @RequestParam(defaultValue = "ASC") String sortDirection,
+            Pageable pageable) {
+
+        Sort.Direction direction = Sort.Direction.fromString(sortDirection);
+        Page<Appointment> appointments = service.searchAppointmentsByPatientId(patientId, status, doctorFirstName,doctorLastName, year, direction, pageable);
+        return ResponseEntity.ok(appointments);
+    }
     @PostMapping
-    public ResponseEntity<String> createAppointment(@RequestBody AppointmentRequest request){
+    public ResponseEntity<String> createAppointment(@RequestBody @Valid AppointmentRequest request){
         service.createAppointment(request);
         return ResponseEntity.ok("create success !");
     }

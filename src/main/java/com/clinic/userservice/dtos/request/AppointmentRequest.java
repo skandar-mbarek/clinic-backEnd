@@ -1,5 +1,6 @@
 package com.clinic.userservice.dtos.request;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -13,8 +14,11 @@ public class AppointmentRequest {
     @NotNull(message = "the patient is required")
     private Long patientId;
     private Long DiseaseId;
+    private String description;
+    @NotBlank(message = "The date is required")
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Date must be in the format yyyy-MM-dd")
     private String date;
+    @NotBlank(message = "The date is required")
     @Pattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Time must be in the format HH:mm")
     private String time;
     private Boolean status;

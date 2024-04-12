@@ -24,12 +24,12 @@ public class DoctorPatientController {
     @GetMapping
     public ResponseEntity<Page<DoctorDto>> searchDoctor(
             @RequestParam(name = "specialityId",required = false) Long specialityId,
-            @RequestParam(name = "city",required = false) String city,
+            @RequestParam(name = "state",required = false) String state,
             @RequestParam(name = "page",defaultValue = "0") int page,
             @RequestParam(name = "size",defaultValue = "10") int size
     ){
 
-        return new ResponseEntity(doctorService.searchDoctors(specialityId, city, page, size), HttpStatus.OK);
+        return new ResponseEntity(doctorService.searchDoctors(specialityId, state, page, size), HttpStatus.OK);
 
     }
     @GetMapping("{id}")

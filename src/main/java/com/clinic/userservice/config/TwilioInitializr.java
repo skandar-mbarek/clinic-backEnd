@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 public class TwilioInitializr {
 
 
+    @Autowired
     private final TwilioConfiguration twilioConfiguration;
 
-    @Autowired
     public TwilioInitializr(TwilioConfiguration twilioConfiguration) {
         this.twilioConfiguration = twilioConfiguration;
         Twilio.init(

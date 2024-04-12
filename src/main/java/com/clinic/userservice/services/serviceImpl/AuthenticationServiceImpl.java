@@ -69,7 +69,7 @@ public class AuthenticationServiceImpl implements AthenticationService {
         log.info(address.getCity());
         Patient patient = Patient.builder()
                 .firstName(request.getFirstName())
-                .lasName(request.getLasName())
+                .lastName(request.getLasName())
                 .gender(request.getGendre())
                 .phoneNumber(request.getPhoneNumber())
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -129,7 +129,7 @@ public class AuthenticationServiceImpl implements AthenticationService {
 
         Doctor doctor = Doctor.builder()
                 .firstName(request.getFirstName())
-                .lasName(request.getLasName())
+                .lastName(request.getLasName())
                 .gender(request.getGendre())
                 .phoneNumber(request.getPhoneNumber())
                 .email(request.getEmail())

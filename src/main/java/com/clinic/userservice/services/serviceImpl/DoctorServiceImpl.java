@@ -26,11 +26,11 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository repository;
 
     @Override
-    public Page<DoctorDto> searchDoctors(Long specialityId, String city, int page, int size) {
+    public Page<DoctorDto> searchDoctors(Long specialityId, String state, int page, int size) {
 
         PageRequest pageable = PageRequest.of(page,size);
 
-        Specification<Doctor> spec = DoctorSpecification.findBySpecialityIdAndCity(specialityId, city);
+        Specification<Doctor> spec = DoctorSpecification.findBySpecialityIdAndCity(specialityId, state);
         Page<Doctor> doctorPage = repository.findAll(spec,pageable);
 
         return doctorPage.map(DoctorDto::convertToDto);

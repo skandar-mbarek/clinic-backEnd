@@ -4,7 +4,6 @@ import com.clinic.userservice.enumData.Gendre;
 import com.clinic.userservice.enumData.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -33,11 +32,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long userId;
     protected String firstName;
-    protected String lasName;
+    protected String lastName;
     protected Gendre gender;
     protected String phoneNumber;
     protected String email;
     protected String password;
+    protected String imageName;
     @OneToOne
     protected Address address;
     protected Date dateOfBirth;

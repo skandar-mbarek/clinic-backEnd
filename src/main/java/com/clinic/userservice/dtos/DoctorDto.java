@@ -29,6 +29,7 @@ public class DoctorDto {
     private Gendre gendre;
     private String phoneNumber;
     private String email;
+    private String imageName;
     private Date dateOfBirth;
     private String licenceNumber;
     private Date licenceDate;
@@ -46,11 +47,12 @@ public class DoctorDto {
         return DoctorDto.builder()
                 .id(doctor.getUserId())
                 .firstName(doctor.getFirstName())
-                .lastName(doctor.getLasName())
+                .lastName(doctor.getLastName())
                 .gendre(doctor.getGender())
                 .phoneNumber(doctor.getPhoneNumber())
                 .email(doctor.getEmail())
                 .dateOfBirth(doctor.getDateOfBirth())
+                .imageName(doctor.getImageName())
                 .licenceNumber(doctor.getLicenceNumber())
                 .licenceDate(doctor.getLicenceDate())
                 .speciality(doctor.getSpeciality())
