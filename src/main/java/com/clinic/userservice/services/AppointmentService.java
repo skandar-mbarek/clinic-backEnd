@@ -19,4 +19,5 @@ public interface AppointmentService {
     Page<Appointment> searchAppointmentsByPatientId(Long patientId, Boolean status, String doctorFirstName,String doctorLastName, String year, Sort.Direction sortDirection, Pageable pageable);
 
     void sendSmsForUpcomingAppointments();
+    void cancelAppointment(Long appointmentId);
 }

@@ -143,4 +143,13 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
     }
 
+    @Override
+    public void cancelAppointment(Long appointmentId) {
+        Appointment appointment = repository.findById(appointmentId).orElseThrow(
+                ()->new BadRequestException("This appointment is not exist")
+        );
+        appointment.setStatus(false);
+        repository.save(appointment);
+    }
+
 }

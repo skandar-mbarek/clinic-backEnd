@@ -14,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -55,5 +54,10 @@ public class AppointmentPatientController {
     public ResponseEntity<String> createAppointment(@RequestBody @Valid AppointmentRequest request){
         service.createAppointment(request);
         return ResponseEntity.ok("create success !");
+    }
+    @PostMapping("{appointmentId}")
+    public ResponseEntity<String> cancelAppointment(@PathVariable Long appointmentId){
+        service.cancelAppointment(appointmentId);
+        return ResponseEntity.ok("cancelled success !");
     }
 }
