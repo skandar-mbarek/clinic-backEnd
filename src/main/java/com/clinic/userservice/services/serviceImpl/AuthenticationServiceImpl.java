@@ -129,7 +129,7 @@ public class AuthenticationServiceImpl implements AthenticationService {
 
         Doctor doctor = Doctor.builder()
                 .firstName(request.getFirstName())
-                .lastName(request.getLasName())
+                .lastName(request.getLastName())
                 .gender(request.getGendre())
                 .phoneNumber(request.getPhoneNumber())
                 .email(request.getEmail())

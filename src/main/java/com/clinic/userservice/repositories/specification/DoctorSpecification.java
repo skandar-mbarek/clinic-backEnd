@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class DoctorSpecification {
 
-    public static Specification<Doctor> findBySpecialityIdAndCity(Long specialityId ,String state){
+    public static Specification<Doctor> findBySpecialityIdAndState(Long specialityId , String state){
         return (Root<Doctor> root, CriteriaQuery<?> query , CriteriaBuilder criteriaBuilder)->{
             Predicate predicate = criteriaBuilder.conjunction();
 

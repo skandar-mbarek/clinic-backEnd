@@ -66,5 +66,12 @@ public class FileStorage {
             throw new RuntimeException("mahoch mawjoud ************");
         }
     }
+    public String getFileExtension(String fileName) {
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex > 0) {
+            return fileName.substring(dotIndex + 1);
+        }
+        return "";
+    }
 
 }

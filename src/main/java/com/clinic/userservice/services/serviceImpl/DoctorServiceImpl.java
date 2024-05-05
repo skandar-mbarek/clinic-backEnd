@@ -14,8 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -30,7 +28,7 @@ public class DoctorServiceImpl implements DoctorService {
 
         PageRequest pageable = PageRequest.of(page,size);
 
-        Specification<Doctor> spec = DoctorSpecification.findBySpecialityIdAndCity(specialityId, state);
+        Specification<Doctor> spec = DoctorSpecification.findBySpecialityIdAndState(specialityId, state);
         Page<Doctor> doctorPage = repository.findAll(spec,pageable);
 
         return doctorPage.map(DoctorDto::convertToDto);

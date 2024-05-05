@@ -1,6 +1,5 @@
 package com.clinic.userservice.services.serviceImpl;
 
-import com.clinic.userservice.dtos.DoctorDto;
 import com.clinic.userservice.dtos.request.AppointmentRequest;
 import com.clinic.userservice.dtos.request.SmsRequest;
 import com.clinic.userservice.entities.*;
@@ -127,7 +126,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     //@Scheduled(fixedRate = 86400000) //86400000 = 24H
     public void sendSmsForUpcomingAppointments() {
 
-        log.info("aw yekhdem !!!!!!!!!");
 
         LocalDate currentDate = LocalDate.now();
         LocalDate twoDaysLater = currentDate.plusDays(2);

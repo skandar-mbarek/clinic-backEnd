@@ -4,7 +4,7 @@ import com.clinic.userservice.enumData.Gendre;
 import com.clinic.userservice.enumData.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +19,7 @@ import java.util.Date;
 public class DoctorRegisterRequest {
 
     private String firstName;
-    private String lasName;
+    private String lastName;
     @Enumerated(EnumType.STRING)
     private Gendre gendre;
     private String phoneNumber;

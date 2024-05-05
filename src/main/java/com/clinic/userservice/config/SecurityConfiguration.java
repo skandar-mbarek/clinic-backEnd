@@ -26,7 +26,11 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
+                .authorizeHttpRequests(authorize -> authorize
+                        //.requestMatchers("/api/clinic/patient/**").hasAuthority("PATIENT")
+                        //.requestMatchers("/api/clinic/doctor/**").hasAuthority("DOCTOR")
+                        //.requestMatchers("/api/clinic/admin/**").hasAuthority("ADMIN")
+                        .anyRequest().permitAll())
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

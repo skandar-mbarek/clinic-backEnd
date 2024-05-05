@@ -6,6 +6,8 @@ import com.clinic.userservice.dtos.request.DoctorRegisterRequest;
 import com.clinic.userservice.dtos.request.PatientRegisterRequest;
 import com.clinic.userservice.services.AthenticationService;
 import com.clinic.userservice.constants.Constants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -20,40 +22,45 @@ import java.util.Collections;
 @RestController
 @RequestMapping(Constants.APP_ROOT_AUTH)
 @CrossOrigin("*")
+@Tag(name = "Authentication")
 public class AuthenticationController {
 
     @Autowired
     private final AthenticationService authenticationService;
 
+    @Operation(summary = "Doctor Register")
     @PostMapping("/register/doctor")
-    public ResponseEntity<String> doctorRegister(@RequestBody DoctorRegisterRequest request) {
+    public ResponseEntity<String> doctorRegister(@RequestBody  DoctorRegisterRequest request) {
 
         authenticationService.DoctorRegister(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("save success");
     }
-
+    @Operation(summary = "Patient Register")
     @PostMapping("/register/patient")
-    public ResponseEntity<String> patientRegister(@RequestBody PatientRegisterRequest request) {
+    public ResponseEntity<String> patientRegister(@RequestBody @Valid PatientRegisterRequest request) {
 
         authenticationService.patientRegister(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("save success");
     }
 
+    @Operation(summary = "Verify OTP")
     @PostMapping("/verify")
-    public ResponseEntity<AuthenticationResponse> patientRegister(@RequestParam String phoneNumber, @RequestParam String otp) {
+    public ResponseEntity<AuthenticationResponse> VerifyOtp(@RequestParam String phoneNumber, @RequestParam String otp) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.verifyOTP(phoneNumber, otp));
 
     }
 
+    @Operation(summary = "Authentication")
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authentication(@RequestBody @Valid AuthenticationRequest request) {
 
         return ResponseEntity.status(HttpStatus.OK).body(authenticationService.authentication(request));
 
     }
+    @Operation(summary = "Forgot Password")
     @PostMapping("/forgot-password")
     public ResponseEntity<Object> forgotPassword (@RequestParam String phoneNumber){
         authenticationService.forgotPassword(phoneNumber);
@@ -61,6 +68,7 @@ public class AuthenticationController {
                 Collections.singletonMap("message","OTP send to your phone")
         );
     }
+    @Operation(summary = "Reset Password")
     @PostMapping("/reset-password")
     public ResponseEntity<Object> resetPassword(
             @RequestParam String phoneNumber,
