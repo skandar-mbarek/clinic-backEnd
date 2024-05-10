@@ -23,7 +23,7 @@ import java.util.Date;
 @Builder
 public class DoctorDto {
 
-    private Long id;
+    private Long userId;
     private String firstName;
     private String lastName;
     private Gendre gendre;
@@ -45,7 +45,7 @@ public class DoctorDto {
     public static DoctorDto convertToDto(Doctor doctor){
 
         return DoctorDto.builder()
-                .id(doctor.getUserId())
+                .userId(doctor.getUserId())
                 .firstName(doctor.getFirstName())
                 .lastName(doctor.getLastName())
                 .gendre(doctor.getGender())
