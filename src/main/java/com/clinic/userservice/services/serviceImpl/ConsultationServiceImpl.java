@@ -1,5 +1,6 @@
 package com.clinic.userservice.services.serviceImpl;
 
+import com.clinic.userservice.dtos.SpecialityConsultationCount;
 import com.clinic.userservice.dtos.request.ConsultationRequest;
 import com.clinic.userservice.dtos.request.MedicineRequest;
 import com.clinic.userservice.entities.*;
@@ -32,7 +33,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
@@ -226,6 +231,43 @@ public class ConsultationServiceImpl implements ConsultationService {
         return repository.findById(consultationId).orElseThrow(
                 ()->new BadRequestException("this consultation is not exist")
         );
+    }
+
+    @Override
+    public List<SpecialityConsultationCount> getConsultationCountBySpeciality(Long patientId) {
+        return repository.countConsultationsBySpeciality(patientId);
+    }
+
+    @Override
+    public Map<String, Object> getConsultationCountByMonth(String year, Long patientId) {
+        List<Object[]> results = repository.countConsultationsByMonth(year, patientId);
+
+        // Initialize a map with all months and set counts to 0
+        Map<Integer, Long> monthCountMap = IntStream.rangeClosed(1, 12)
+                .boxed()
+                .collect(Collectors.toMap(i -> i, i -> 0L));
+
+        // Fill the map with actual results
+        for (Object[] result : results) {
+            Integer month = (Integer) result[0];
+            Long count = (Long) result[1];
+            monthCountMap.put(month, count);
+        }
+
+        // Create labels and data arrays
+        String[] labels = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        Long[] data = new Long[12];
+
+        for (int i = 0; i < 12; i++) {
+            data[i] = monthCountMap.get(i + 1);
+        }
+
+        // Prepare the result in the required format
+        Map<String, Object> result = new HashMap<>();
+        result.put("labels", labels);
+        result.put("datasets", List.of(Map.of("data", data)));
+
+        return result;
     }
 
 

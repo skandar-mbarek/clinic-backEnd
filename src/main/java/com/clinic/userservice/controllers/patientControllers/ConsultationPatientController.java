@@ -1,12 +1,14 @@
 package com.clinic.userservice.controllers.patientControllers;
 
 import com.clinic.userservice.constants.Constants;
+import com.clinic.userservice.dtos.SpecialityConsultationCount;
 import com.clinic.userservice.entities.Consultation;
 import com.clinic.userservice.entities.Doctor;
 import com.clinic.userservice.enumData.Rate;
 import com.clinic.userservice.services.ConsultationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -53,7 +56,7 @@ public class ConsultationPatientController {
     public ResponseEntity<byte[]> generatePrescription(@PathVariable Long consultationId) {
 
 
-        // Set medication details, other information, etc.
+
 
         // Generate the PDF
         byte[] pdfBytes = service.generatePrescription(consultationId);
@@ -64,5 +67,18 @@ public class ConsultationPatientController {
 
         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
+
+    @Operation(summary = "Get Number of consultation grouped by speciality")
+    @GetMapping("speciality-count/{patientId}")
+    public ResponseEntity<List<SpecialityConsultationCount>> getConsultationCountBySpeciality(@PathVariable Long patientId) {
+        return ResponseEntity.ok(service.getConsultationCountBySpeciality(patientId)) ;
+    }
+
+    @Operation(summary = "Get Number of consultation grouped by Month")
+    @GetMapping("monthly-count/{patientId}")
+    public ResponseEntity<Map<String, Object>> getConsultationCountByMonth(@PathVariable Long patientId, @PathParam("year") String year){
+        return ResponseEntity.ok(service.getConsultationCountByMonth(year, patientId));
+    }
+
 
 }

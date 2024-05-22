@@ -150,4 +150,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         repository.save(appointment);
     }
 
+    @Override
+    public List<Appointment> getUpcomingAppointmentsByPatientId(Long patientId) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        return repository.findUpcomingAppointmentsByPatientId(patientId, currentDate, currentTime);
+    }
+
 }

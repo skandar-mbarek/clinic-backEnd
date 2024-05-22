@@ -20,4 +20,5 @@ public interface AppointmentService {
 
     void sendSmsForUpcomingAppointments();
     void cancelAppointment(Long appointmentId);
+    public List<Appointment> getUpcomingAppointmentsByPatientId(Long patientId);
 }

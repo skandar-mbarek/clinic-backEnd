@@ -67,4 +67,11 @@ public class AppointmentPatientController {
         service.cancelAppointment(appointmentId);
         return ResponseEntity.ok("cancelled success !");
     }
+    @Operation(summary = "Get Upcoming Appointments By Patient")
+    @GetMapping("upcoming/{patientId}")
+    public List<Appointment> getUpcomingAppointmentsByPatientId(@PathVariable Long patientId) {
+        return service.getUpcomingAppointmentsByPatientId(patientId);
+    }
+
+
 }
