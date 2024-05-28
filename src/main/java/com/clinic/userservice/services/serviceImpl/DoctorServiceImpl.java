@@ -26,10 +26,10 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Page<DoctorDto> searchDoctors(Long specialityId, String state, int page, int size) {
 
-        PageRequest pageable = PageRequest.of(page,size);
+        PageRequest pageable = PageRequest.of(page, size);
 
         Specification<Doctor> spec = DoctorSpecification.findBySpecialityIdAndState(specialityId, state);
-        Page<Doctor> doctorPage = repository.findAll(spec,pageable);
+        Page<Doctor> doctorPage = repository.findAll(spec, pageable);
 
         return doctorPage.map(DoctorDto::convertToDto);
     }
@@ -37,9 +37,16 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorDto getById(Long id) {
         Doctor doctor = repository.findById(id).orElseThrow(
-                ()-> new BadRequestException("this doctor is not exist")
+                () -> new BadRequestException("this doctor is not exist")
         );
         return DoctorDto.convertToDto(doctor);
+    }
+
+    @Override
+    public Doctor getDoctorById(Long doctorId) {
+        return repository.findById(doctorId).orElseThrow(
+                () -> new BadRequestException("this doctor is not exist")
+        );
     }
 
 }

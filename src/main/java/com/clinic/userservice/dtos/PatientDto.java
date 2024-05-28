@@ -20,7 +20,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class PatientDto {
-    private Long id;
+    private Long userId;
     private String firstName;
     private String lastName;
     private Gendre gender;
@@ -39,7 +39,7 @@ public class PatientDto {
     public static PatientDto convertToDto(Patient patient){
 
         return PatientDto.builder()
-                .id(patient.getUserId())
+                .userId(patient.getUserId())
                 .firstName(patient.getFirstName())
                 .lastName(patient.getLastName())
                 .gender(patient.getGender())

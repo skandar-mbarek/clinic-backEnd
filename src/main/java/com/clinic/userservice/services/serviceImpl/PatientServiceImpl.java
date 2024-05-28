@@ -45,4 +45,12 @@ public class PatientServiceImpl implements PatientService {
         }
         repository.save(patient);
     }
+
+    @Override
+    public Patient getPatientByID(Long patientId) {
+        return  repository.findById(patientId).orElseThrow(
+                () -> new BadRequestException("this patient is not exist")
+        );
+    }
+
 }
