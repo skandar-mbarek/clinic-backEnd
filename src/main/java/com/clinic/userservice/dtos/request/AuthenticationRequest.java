@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationRequest {
 
-    @NotBlank(message = "Username is required")
+    @NotBlank(message = "PhoneNumber is required")
     private String phoneNumber;
     private String password;
 }

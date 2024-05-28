@@ -186,6 +186,7 @@ public class AuthenticationServiceImpl implements AthenticationService {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .user(user)
                 .build();
         }
         catch (AuthenticationException e){

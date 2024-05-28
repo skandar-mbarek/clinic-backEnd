@@ -4,6 +4,7 @@ import com.clinic.userservice.constants.Constants;
 import com.clinic.userservice.dtos.DoctorDto;
 import com.clinic.userservice.dtos.PatientDto;
 import com.clinic.userservice.dtos.request.UpdatePatientRequest;
+import com.clinic.userservice.entities.Patient;
 import com.clinic.userservice.services.PatientService;
 import com.clinic.userservice.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +31,7 @@ public class PatientController {
 
     @Operation(summary = "Connected Patient")
     @GetMapping("/me")
-    public ResponseEntity<PatientDto> getMe (){
+    public ResponseEntity<Patient> getMe (){
         return ResponseEntity.ok(userService.getMe());
     }
     @Operation(summary = "Update Patient")

@@ -22,13 +22,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private final PatientRepository repository;
     @Override
-    public PatientDto getMe() {
+    public Patient getMe() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPhone = authentication.getName();
         Optional<Patient> me = repository.findByPhoneNumber(currentPhone);
         if (me.isPresent()){
-            return PatientDto.convertToDto(me.get());
+            return me.get();
         }else throw new BadRequestException("this user is not exist");
     }
 }

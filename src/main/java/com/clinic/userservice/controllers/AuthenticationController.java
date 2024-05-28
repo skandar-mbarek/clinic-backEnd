@@ -57,7 +57,7 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authentication(@RequestBody @Valid AuthenticationRequest request) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(authenticationService.authentication(request));
+        return ResponseEntity.ok(authenticationService.authentication(request));
 
     }
     @Operation(summary = "Forgot Password")
